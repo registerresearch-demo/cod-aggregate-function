@@ -1,0 +1,29 @@
+     public boolean More ...remove(Object o) {
+440         if (o == null) {
+441             for (int index = 0; index < size; index++)
+442                 if (elementData[index] == null) {
+443                     fastRemove(index);
+444                     return true;
+445                 }
+446         } else {
+447             for (int index = 0; index < size; index++)
+448                 if (o.equals(elementData[index])) {
+449                     fastRemove(index);
+450                     return true;
+451                 }
+452         }
+453         return false;
+454     }
+455 
+456     /*
+457      * Private remove method that skips bounds checking and does not
+458      * return the value removed.
+459      */
+460     private void More ...fastRemove(int index) {
+461         modCount++;
+462         int numMoved = size - index - 1;
+463         if (numMoved > 0)
+464             System.arraycopy(elementData, index+1, elementData, index,
+465                              numMoved);
+466         elementData[--size] = null; // Let gc do its work
+467     }
